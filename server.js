@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const router = require('./routes/PlantationRoute');
+const planningRoutes = require('./routes/PlantationPlanRoute')
 
 const app = express();
 const PORT = process.env.PORT || 5000;
