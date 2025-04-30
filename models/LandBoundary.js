@@ -1,10 +1,14 @@
 // systemApi/models/LandBoundary.js
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 
-const landBoundarySchema = new mongoose.Schema({
+const landBoundarySchema = new Schema({
   userId: String, // or ObjectId if you have users
   coordinates: Array, // e.g., [{lat: ..., lng: ...}, ...]
+  totalArea: Number,        // in your preferred units (e.g., square meters)
+  plantableArea: Number,    // in your preferred units
+  treeSpacing: Number,      // in meters (or your preferred unit)
+  totalTrees: Number,
   createdAt: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('LandBoundary', landBoundarySchema);
+export default model('LandBoundary', landBoundarySchema);

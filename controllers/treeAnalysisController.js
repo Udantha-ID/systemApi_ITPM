@@ -1,6 +1,6 @@
-const TreeAnalysis = require('../models/TreeAnalysis');
+import TreeAnalysis from '../models/TreeAnalysis';
 
-exports.createTreeAnalysis = async (req, res) => {
+export async function createTreeAnalysis(req, res) {
   try {
     const analysis = new TreeAnalysis(req.body);
     await analysis.save();
@@ -8,9 +8,9 @@ exports.createTreeAnalysis = async (req, res) => {
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
-};
+}
 
-exports.getTreeAnalyses = async (req, res) => {
+export async function getTreeAnalyses(req, res) {
   const { userId, landId } = req.query;
   const filter = {};
   if (userId) filter.userId = userId;
@@ -21,4 +21,4 @@ exports.getTreeAnalyses = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}
