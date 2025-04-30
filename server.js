@@ -3,6 +3,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+// Import routes
+const userRoutes = require('./routes/userRoutes');
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -21,10 +24,13 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log("MongoDB Connected"))
 .catch((err) => console.error("MongoDB Connection Error:", err));
 
-// Sample Route
+// Routes
 app.get("/", (req, res) => {
   res.send("API is running...");
 });
+
+// API routes
+app.use('/api/users', userRoutes);
 
 // Start Server
 app.listen(PORT, () => {
