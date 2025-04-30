@@ -57,10 +57,15 @@ exports.login = async (req, res) => {
     const userObject = user.toObject();
     delete userObject.password;
 
-    res.status(200).json({ user: userObject, token });
+    // Send response with both user and token
+    res.status(200).json({ 
+      user: userObject, 
+      token,
+      message: 'Login successful'
+    });
   } catch (error) {
     console.error('Login error:', error);
-    res.status(500).json({ message: 'Something went wrong' });
+    res.status(500).json({ message: 'Something went wrong. Please try again later.' });
   }
 };
 
