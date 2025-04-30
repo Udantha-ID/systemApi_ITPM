@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const router = require('./routes/PlantationRoute');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -64,3 +65,9 @@ app.get('/api/weather', async (req, res) => {
     res.status(500).json({ error: 'Error fetching weather data' });
   }
 });
+
+// Plantation routes
+app.use('/plantations', router);
+
+//planning routes
+app.use('/plannings', planningRoutes);
