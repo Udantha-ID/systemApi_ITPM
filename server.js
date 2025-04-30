@@ -6,7 +6,6 @@ const axios = require('axios');
 const router = require('./routes/PlantationRoute');
 const planningRoutes = require('./routes/PlantationPlanRoute')
 
-// Import routes
 const userRoutes = require('./routes/userRoutes');
 
 const app = express();
@@ -27,13 +26,14 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log("MongoDB Connected"))
 .catch((err) => console.error("MongoDB Connection Error:", err));
 
-// Routes
+// Sample Route
 app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
 // API routes
 app.use('/api/users', userRoutes);
+
 
 // Start Server
 app.listen(PORT, () => {
