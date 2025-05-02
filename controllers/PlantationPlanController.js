@@ -45,20 +45,7 @@ const getPlanning = async (req, res) => {
   }
 };
 
-// Update planning
-const updatePlanning = async (req, res) => {
-  try {
-    const updatedPlanning = await Planning.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true, runValidators: true }
-    );
-    if (!updatedPlanning) return res.status(404).json({ message: 'Planning not found' });
-    res.json(updatedPlanning);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
+
 
 // Delete planning
 const deletePlanning = async (req, res) => {

@@ -116,27 +116,7 @@ const deletePlantation = async (req, res) => {
   }
 };
 
-// Mark as complete
-const completePlantation = async (req, res) => {
-  try {
-    const plantation = await Plantation.findByIdAndUpdate(
-      req.params.id,
-      {
-        completed: true,
-        completedDate: Date.now()
-      },
-      { new: true } 
-    );
-    
-    if (!plantation) {
-      return res.status(404).json({ error: 'Plantation not found' });
-    }
-    
-    res.json(plantation);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+
 
 // Get completed plantations
 const getCompletedPlantations = async (req, res) => {
