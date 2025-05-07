@@ -14,16 +14,23 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
-// Check the loaded URI (optional debug)
-console.log("Mongo URI:", process.env.MONGO_URI);
+// Log the MongoDB URI for debugging (only show partial for security)
+const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/agriSystemDB';
+console.log("MongoDB Connection URI:", mongoUri.substring(0, 15) + "...");
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
+// Connect to MongoDB with enhanced error handling
+mongoose.connect(mongoUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-.then(() => console.log("MongoDB Connected"))
-.catch((err) => console.error("MongoDB Connection Error:", err));
+.then(() => {
+  console.log("✅ MongoDB Connected Successfully");
+})
+.catch((err) => {
+  console.error("❌ MongoDB Connection Error:", err);
+  console.log("Please check your MongoDB connection string in the .env file");
+  // Application will continue running, but database operations will fail
+});
 
 // Sample Route
 app.get("/", (req, res) => {
@@ -37,6 +44,7 @@ app.use('/api/analyses', analysisRoutes);
 // Start Server
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`👉 API available at http://localhost:${PORT}`);
 });
 
 // Weather endpoints

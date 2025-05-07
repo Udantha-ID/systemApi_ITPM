@@ -23,9 +23,10 @@ exports.protect = async (req, res, next) => {
     try {
       // Verify token
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      console.log('Decoded token:', decoded); // Log for debugging
 
-      // Get user from token
-      const user = await User.findById(decoded.id).select('-password');
+      // Get user from token - use userId instead of id
+      const user = await User.findById(decoded.userId || decoded.id).select('-password');
 
       if (!user) {
         return res.status(401).json({
@@ -39,6 +40,7 @@ exports.protect = async (req, res, next) => {
       next();
     } catch (error) {
       // Token verification failed
+      console.error('Token verification failed:', error.message);
       return res.status(401).json({
         success: false,
         message: 'Not authorized, invalid token'
