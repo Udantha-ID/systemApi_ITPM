@@ -24,7 +24,7 @@ const createPlanning = async (req, res) => {
   }
 };
 
-// Get all plannings
+// Get all planning
 const getAllPlannings = async (req, res) => {
   try {
     const plannings = await Planning.find();
