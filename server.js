@@ -6,6 +6,8 @@ const axios = require('axios');
 
 const userRoutes = require('./routes/userRoutes');
 const analysisRoutes = require('./routes/analysisRoutes');
+const plantationroutes = require('./routes/PlantationRoute');
+const planningRoutes = require('./routes/PlantationPlanRoute');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -40,6 +42,8 @@ app.get("/", (req, res) => {
 // API routes
 app.use('/api/users', userRoutes);
 app.use('/api/analyses', analysisRoutes);
+app.use('/plantations', plantationroutes);
+app.use('/plannings', planningRoutes);
 
 // Start Server
 app.listen(PORT, () => {
