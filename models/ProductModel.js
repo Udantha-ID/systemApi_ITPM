@@ -46,7 +46,6 @@ const productSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-// Add index for better search performance
 productSchema.index({ name: 'text', description: 'text', category: 1 });
 
 const Product = mongoose.model('Product', productSchema);

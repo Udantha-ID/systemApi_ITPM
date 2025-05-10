@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const axios = require('axios');
+const path = require('path');
 
 const userRoutes = require('./routes/userRoutes');
 const analysisRoutes = require('./routes/analysisRoutes');
@@ -15,7 +16,11 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+
+// Serve static files (including uploaded images)
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
 // Log the MongoDB URI for debugging (only show partial for security)
 const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/agriSystemDB';
