@@ -101,15 +101,15 @@ const updateProduct = async (req, res) => {
 // @access  Public (adjust as needed)
 const deleteProduct = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id);
-
-    if (product) {
-      await product.remove();
-      res.json({ message: 'Product removed' });
-    } else {
-      res.status(404).json({ message: 'Product not found' });
+    const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+    
+    if (!deletedProduct) {
+      return res.status(404).json({ message: 'Product not found' });
     }
+    
+    res.json({ message: 'Product removed successfully' });
   } catch (error) {
+    console.error('Delete error:', error);
     res.status(500).json({
       message: 'Error deleting product',
       error: error.message
