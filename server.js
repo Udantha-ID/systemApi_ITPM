@@ -45,7 +45,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/analyses', analysisRoutes);
 app.use('/plantations', plantationroutes);
 app.use('/plannings', planningRoutes);
-app.use('/product', productRoutes)
+app.use('/products', productRoutes);
 
 // Start Server
 app.listen(PORT, () => {
